@@ -220,10 +220,9 @@ int main(int, char **) {
 
   // Audio
   {
-    printf(
-        "NOTE AUDIO IS BROKEN FOR FUCKS SAKE ETHAN DON'T FORGET TO FIX THIS\n");
     Event::addEventListener("LeftMouseButtonDown", []() {
-      // Audio("res/sound/coldsnap.wav").play();
+      Audio audio = Audio("res/sound/coldsnap.wav");
+      audio.play();
     });
   }
 

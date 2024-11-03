@@ -11,7 +11,7 @@ windows = False
 
 if (linux):
     copytree(os.path.join(CH2D_DIR, "include"), fr"{MY_DIR}/include", dirs_exist_ok=True)
-    copyfile(os.path.join(CH2D_DIR, "build", "libcharlie2D.so"), fr"{MY_DIR}/lib/windows/charlie2D/libcharlie2D.so")
+    copyfile(os.path.join(CH2D_DIR, "build", "libcharlie2D.so"), fr"{MY_DIR}/lib/linux/charlie2D/libcharlie2D.so")
 if (windows):
     copytree(os.path.join(CH2D_DIR, "include"), fr"{MY_DIR}/include", dirs_exist_ok=True)
     copyfile(os.path.join(CH2D_DIR, "build", "libcharlie2D.dll.a"), fr"{MY_DIR}/lib/windows/charlie2D/libcharlie2D.dll.a")
