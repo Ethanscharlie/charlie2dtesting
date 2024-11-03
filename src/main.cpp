@@ -220,7 +220,8 @@ int main(int, char **) {
 
   // Audio
   {
-    printf("NOTE AUDIO IS BROKEN FOR FUCKS SAKE ETHAN DON'T FORGET TO FIX THIS\n");
+    printf(
+        "NOTE AUDIO IS BROKEN FOR FUCKS SAKE ETHAN DON'T FORGET TO FIX THIS\n");
     Event::addEventListener("LeftMouseButtonDown", []() {
       // Audio("res/sound/coldsnap.wav").play();
     });
@@ -248,6 +249,90 @@ int main(int, char **) {
   }
 
   // Camera
+  {}
+
+  // END OF CORE TESTING
+
+  // Alighnment.hpp
+  {}
+
+  // Animation.hpp
+  {}
+
+  // Button.hpp
+  {}
+
+  // ExtendedComponent.hpp
+  {}
+
+  // FadeTransition.hpp
+  {}
+
+  // JumpMan.hpp
+  {}
+
+  // LDTKEntity.hpp
+  {}
+
+  // Light.hpp
+  {}
+
+  // physicsBody.hpp
+  {}
+
+  // Scheduler.hpp
+  {}
+
+  // ShadowFilter.hpp
+  {}
+
+  // SolidBody.hpp
+  {}
+
+  // Sprite.hpp
+  {}
+
+  // Text.hpp
+  {}
+
+  // UISliceRenderer.hpp
+  {}
+
+  // LDTK
+  // LDTK_EntityData.hpp
+  {}
+
+  // LDTK_EntityDefinition.hpp
+  {}
+
+  // LDTK_EntityInstance.hpp
+  {}
+
+  // LDTK_EntityLayer.hpp
+  {}
+
+  // LDTK_FieldInstance.hpp
+  {}
+
+  // LDTK_LayerDefinition.hpp
+  {}
+
+  // LDTK_Level.hpp
+  {}
+
+  // LDTK_Project.hpp
+  {}
+
+  // LDTK_TileLayer.hpp
+  {}
+
+  // LDTK_Tilemap.hpp
+  {}
+
+  // LDTK_Tileset.hpp
+  {}
+
+  // LDTK_World.hpp
   {}
 
   GameManager::doUpdateLoop();
