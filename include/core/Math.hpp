@@ -4,8 +4,8 @@
 #include "SDL_rect.h"
 #include "SDL_render.h"
 #include "Vector2f.hpp"
-#include <SDL.h>
 #include "nlohmann/json.hpp"
+#include <SDL.h>
 #include <cstdlib>
 #include <ctime>
 #include <string>
@@ -13,6 +13,7 @@
 
 class Box;
 class Entity;
+struct Image;
 
 enum class EntityRenderPositionType { World, Screen };
 
@@ -66,26 +67,28 @@ Box getRenderBox(Entity *entity);
 
 std::array<Uint8, 3> hexToRGB(int hexColor);
 
-// template <typename T> std::vector<T> jsonToVector(const nlohmann::json &j) {
-//   std::vector<T> result;
-//
-//   if (j.is_array()) {
-//     for (const auto &item : j) {
-//       if (item.is_number_integer()) {
-//         result.push_back(item.get<int>());
-//       } else if (item.is_number_float()) {
-//         result.push_back(item.get<float>());
-//       } else if (item.is_string()) {
-//         result.push_back(item.get<std::string>());
-//       } else if (item.is_boolean()) {
-//         result.push_back(item.get<bool>());
-//       }
-//     }
-//   }
-//
-//   return result;
-// }
-//
+std::vector<Image> generateSpritesheetAnimation(Image image, int gridSize = 16,
+                                                int row = 0);
+
+template <typename T> std::vector<T> jsonToVector(const nlohmann::json &j) {
+  std::vector<T> result;
+
+  if (j.is_array()) {
+    for (const auto &item : j) {
+      if (item.is_number_integer()) {
+        result.push_back(item.get<int>());
+      } else if (item.is_number_float()) {
+        result.push_back(item.get<float>());
+      } else if (item.is_string()) {
+        result.push_back(item.get<std::string>());
+      } else if (item.is_boolean()) {
+        result.push_back(item.get<bool>());
+      }
+    }
+  }
+
+  return result;
+}
 
 //
 //

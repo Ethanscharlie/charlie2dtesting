@@ -6,8 +6,8 @@ from shutil import move as shutilmove
 CH2D_DIR = sys.argv[1]
 MY_DIR = os.path.dirname(os.path.abspath(__file__))
 
-linux = False
-windows = True
+linux = True
+windows = False
 
 if (linux):
     copytree(os.path.join(CH2D_DIR, "include"), fr"{MY_DIR}/include", dirs_exist_ok=True)
