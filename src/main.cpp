@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "Component.hpp"
+#include "GameManager.hpp"
 #include "Math.hpp"
 #include "SDL_render.h"
 #include "config.h"
@@ -23,12 +24,10 @@
 
 class TestComponent : public Component {
 public:
-  void start() override {}
-  void update(float deltaTime) override {}
+  TestComponent(Entity &entity) : Component(entity) {}
+  void update() override {}
   void onDestroy() override {}
-  void onScreenChange() override { screenSizeChange = true; }
 
-  bool screenSizeChange = false;
 };
 
 int main(int, char **) {
@@ -36,34 +35,21 @@ int main(int, char **) {
 
   // Entity
   {
-    Entity *entity = GameManager::createEntity("");
-    entity->add<Sprite>();
-    entity->get<Sprite>()->standardUpdate =
+    Entity &entity = GameManager::createEntity("");
+    entity.addComponent<Sprite>();
+    entity.getComponent<Sprite>().standardUpdate =
         false; // Access data from added component
 
-    entity->changeTag("newtag");
-    if (entity->tag != "newtag") {
-      printf("Entity tag change failed\n");
-    }
-
-    std::map<std::type_index, Component *> components = entity->gets();
-    components[typeid(Sprite)]->standardUpdate = false;
-
-    entity->remove<Sprite>();
-    if (entity->checkComponent<Sprite>()) {
+    entity.remove<Sprite>();
+    if (entity.checkComponent<Sprite>()) {
       printf("Component removal failed\n");
     }
   }
 
   // Component
   {
-    Entity *entity = GameManager::createEntity("");
-    TestComponent *test = entity->add<TestComponent>();
-    GameManager::setWindowSize({100, 100});
-    if (!test->screenSizeChange) {
-      printf("Component did not detect screen size change\n");
-    }
-    GameManager::setWindowSize({1920, 1080});
+    Entity &entity = GameManager::createEntity("");
+    TestComponent &test = entity.addComponent<TestComponent>();
   }
 
   // Game Manager
@@ -80,14 +66,11 @@ int main(int, char **) {
     GameManager::getEntities("Me");
     GameManager::getComponents<Sprite>();
 
-    if (GameManager::getAllObjects().size() < 6) {
+    if (GameManager::getEntities().size() < 6) {
       printf("Get all object returned the wrong amount of objects\n");
     }
 
     GameManager::destroyAll();
-    // if (GameManager::getAllObjects().size() != 0) {
-    //   printf("Destroy all didn't work\n");
-    // }
   }
 
   // Vector2f
@@ -204,18 +187,18 @@ int main(int, char **) {
 
   // Image
   {
-    Entity *entity = GameManager::createEntity("Sprite");
-    entity->box.size = {400, 200};
-    entity->add<Sprite>()->image = Image("res/PixilEthan.png");
-    Image &image = entity->get<Sprite>()->image;
+    Entity &entity = GameManager::createEntity("Sprite");
+    entity.box.size = {400, 200};
+    entity.addComponent<Sprite>().image = Image("res/PixilEthan.png");
+    Image &image = entity.getComponent<Sprite>().image;
     image.flip = SDL_FLIP_HORIZONTAL;
     image.alpha = 100;
     image.color = {255, 0, 0};
-
+    
     // Angle
     Angle angle;
     angle.rotate(90);
-    entity->get<Sprite>()->angle = angle;
+    entity.getComponent<Sprite>().angle = angle;
   }
 
   // Audio

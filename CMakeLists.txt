@@ -38,39 +38,27 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 
 if (LINUX)
-  set(SDL_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/linux/SDL2")
   set(CH2D_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/linux/charlie2D")
-elseif (WIN32)
-  set(SDL_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/windows/SDL2")
-  set(CH2D_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/windows/charlie2D")
-endif()
 
-find_library(SDL2_      SDL2       PATHS ${SDL_LIB_PATH})
-find_library(SDL2_MAIN  SDL2main   PATHS ${SDL_LIB_PATH})
-find_library(SDL2_TTF   SDL2_ttf   PATHS ${SDL_LIB_PATH})
-find_library(SDL2_IMAGE SDL2_image PATHS ${SDL_LIB_PATH})
-find_library(SDL2_MIXER SDL2_mixer PATHS ${SDL_LIB_PATH})
-find_library(SDL2_GFX SDL2_gfx PATHS ${SDL_LIB_PATH})
+  find_library(SDL2_      SDL2       )
+  find_library(SDL2_MAIN  SDL2main   )
+  find_library(SDL2_TTF   SDL2_ttf   )
+  find_library(SDL2_IMAGE SDL2_image )
+  find_library(SDL2_MIXER SDL2_mixer )
+  find_library(SDL2_GFX SDL2_gfx     )
 
-find_library(CHARLIE2D charlie2D PATHS ${CH2D_LIB_PATH})
+  find_library(CHARLIE2D charlie2D PATHS ${CH2D_LIB_PATH})
 
-if (LINUX)
   target_link_libraries(${PROJECT_NAME}
-    ${SDL2_MAIN}
-    ${SDL2_}
-    ${SDL2_TTF}
+    ${SDL2_MAIN} 
+    ${SDL2_} 
+    ${SDL2_GFX} 
+    ${SDL2_TTF} 
     ${SDL2_IMAGE}
     ${SDL2_MIXER}
-    ${SDL2_GFX}
-    ${CHARLIE2D}
+    ${CHARLIE2D}   
   )
 
-  file(COPY ${SDL2_MAIN} DESTINATION ${CMAKE_BINARY_DIR})
-  file(COPY ${SDL2_} DESTINATION ${CMAKE_BINARY_DIR})
-  file(COPY ${SDL2_TTF} DESTINATION ${CMAKE_BINARY_DIR})
-  file(COPY ${SDL2_IMAGE} DESTINATION ${CMAKE_BINARY_DIR})
-  file(COPY ${SDL2_GFX} DESTINATION ${CMAKE_BINARY_DIR})
-  file(COPY ${CHARLIE2D} DESTINATION ${CMAKE_BINARY_DIR})
 
 elseif (WIN32)
   target_link_libraries(${PROJECT_NAME}
