@@ -8,6 +8,8 @@
 #include "Math.hpp"
 #include "SDL_render.h"
 #include "config.h"
+#include "ldtk/LDTK_Project.hpp"
+#include "ldtk/LDTK_Tilemap.hpp"
 
 /*
  * Some useful code snips
@@ -27,11 +29,10 @@ public:
   TestComponent(Entity &entity) : Component(entity) {}
   void update() override {}
   void onDestroy() override {}
-
 };
 
 int main(int, char **) {
-  GameManager::init();
+  GameManager::init({256, 256});
 
   // Entity
   {
@@ -194,7 +195,7 @@ int main(int, char **) {
     image.flip = SDL_FLIP_HORIZONTAL;
     image.alpha = 100;
     image.color = {255, 0, 0};
-    
+
     // Angle
     Angle angle;
     angle.rotate(90);
@@ -281,6 +282,20 @@ int main(int, char **) {
   {}
 
   // LDTK
+  Entity &player = GameManager::createEntity("Player");
+  player.box.size = {16, 16};
+  player.box.setWithCenter(GameManager::getGameWindowSize() / 2);
+  player.setLayer(-10);
+  player.addComponent<JumpMan>();
+  player.addComponent<Sprite>().image = Image("res/images/spaceBean.png");
+
+  LDTK::Project ldtk("res/TheGodGivenTestingProject.ldtk");
+  ldtk.render();
+  ldtk.loadLevel("795a28d0-9b00-11ef-85c7-4d2efb9a25bb");
+  GameManager::getEntities("Ground")[0]->getComponent<LDTK::Tilemap>().solid =
+      true;
+  Camera::position += GameManager::getGameWindowSize() / 2;
+
   // LDTK_EntityData.hpp
   {}
 
