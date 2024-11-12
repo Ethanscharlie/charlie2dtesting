@@ -2,7 +2,7 @@
 
 # Compile Instructions
 ## Linux
-Install cmake
+Install cmake along with sdl2, sdl2_image, sdl2_ttf, sdl2_mixer, and sdl2_gfx
 
 Compile
 ```
